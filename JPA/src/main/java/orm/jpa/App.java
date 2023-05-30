@@ -3,6 +3,8 @@ package orm.jpa;
 
 import orm.jpa.model.Student;
 
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
         RepositoryStudent repo = new RepositoryStudent();
@@ -18,6 +20,21 @@ public class App {
         student = repo.find(student);
         System.out.println("Find Student");
         System.out.println(student.toString());
+
+        // find firstName
+
+        List<String> result = repo.findFirstNames();
+        System.out.println("Find First Name");
+        for (String item : result) {
+            System.out.println(item);
+        }
+
+        // find lastName
+        List<String> results = repo.findLastNames();
+        System.out.println("Find Last Name");
+        for (String item : results) {
+            System.out.println(item);
+        }
 
         // update
         student = repo.update(student);

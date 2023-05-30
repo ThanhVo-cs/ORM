@@ -2,10 +2,8 @@ package orm.jpa;
 
 import orm.jpa.model.Student;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.List;
 
 public class RepositoryStudent {
     private EntityManagerFactory entityManagerFactory;
@@ -29,6 +27,20 @@ public class RepositoryStudent {
         return std;
     }
 
+    public List<String> findFirstNames() {
+        entityManager.getTransaction().begin();
+        Query qr = entityManager.createNativeQuery("select first_name from student");
+        entityManager.getTransaction().commit();
+        return qr.getResultList();
+    }
+
+    public List<String> findLastNames() {
+        entityManager.getTransaction().begin();
+        Query qr = entityManager.createNativeQuery("select last_name from student");
+        entityManager.getTransaction().commit();
+        return qr.getResultList();
+    }
+
     public Student update(Student student) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
@@ -45,6 +57,7 @@ public class RepositoryStudent {
         entityManager.remove(stu);
         entityTransaction.commit();
     }
+
 
     public void close() {
         entityManager.close();
