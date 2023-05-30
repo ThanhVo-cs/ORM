@@ -36,13 +36,18 @@ public class App {
             System.out.println(item);
         }
 
+        //find by id
+        Student res = repo.findById(1L);
+        System.out.println("Find By Id");
+        System.out.println(res.toString());
+
         // update
         student = repo.update(student);
         System.out.println("Update Student");
         System.out.println(student.toString());
 
         //delete
-        repo.delete(student);
+        //repo.delete(student);
 
         repo.close();
     }

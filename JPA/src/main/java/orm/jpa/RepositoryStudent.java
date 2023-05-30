@@ -28,19 +28,20 @@ public class RepositoryStudent {
     }
 
     public List<String> findFirstNames() {
-        entityManager.getTransaction().begin();
         Query qr = entityManager.createNativeQuery("select first_name from student");
-        entityManager.getTransaction().commit();
         return qr.getResultList();
     }
 
     public List<String> findLastNames() {
-        entityManager.getTransaction().begin();
         Query qr = entityManager.createNativeQuery("select last_name from student");
-        entityManager.getTransaction().commit();
         return qr.getResultList();
     }
 
+    public Student findById(Long id) {
+        Query query = entityManager.createNamedQuery("find student by id");
+        query.setParameter("id", id);
+        return (Student) query.getSingleResult();
+    }
     public Student update(Student student) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
