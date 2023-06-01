@@ -1,6 +1,7 @@
 package orm.jpa;
 
 
+import orm.jpa.model.School;
 import orm.jpa.model.Student;
 
 import java.util.ArrayList;
@@ -11,14 +12,26 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         RepositoryStudent repo = new RepositoryStudent();
+        ReposirotySchool repoSchool = new ReposirotySchool();
         Student student = new Student();
-        student.setFirstName("tran");
-        student.setLastName("thi");
+        student.setFirstName("Duong Huynh");
+        student.setLastName("Thi");
         //add
         student = repo.add(student);
         System.out.println("Add Student");
         System.out.println(student.toString());
 
+        //add School
+        School school = new School("IUH", "HCM");
+        repoSchool.add(school);
+        student.setSchool(school);
+
+        repo.addSchool(student.getId(), school);
+        System.out.println("School" + school.toString());
+
+
+        student = repo.findById(student.getId());
+        System.out.println("Student Info: " + student.toString());
         // find
         student = repo.find(student);
         System.out.println("Find Student");

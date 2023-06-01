@@ -17,6 +17,9 @@ public class Student {
     @Column(name = "last_name", nullable = false, length = 200)
     private String lastName;
 
+    @OneToOne
+    private School school;
+
     public Student() {
     }
 
@@ -32,6 +35,7 @@ public class Student {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", school=" + school +
                 '}';
     }
 
@@ -57,5 +61,13 @@ public class Student {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 }
