@@ -51,6 +51,21 @@ public class RepositoryStudent {
         return stu;
     }
 
+    public Student updateFirstName(String firstName, Long id) {
+        entityManager.getTransaction().begin();
+        Query query = entityManager.createNativeQuery("update student set first_name = '" + firstName + "' where id = " + id);
+        query.executeUpdate();
+        entityManager.getTransaction().commit();
+        return findById(id);
+    }
+
+    public Student updatelastName(String lastName, Long id) {
+        entityManager.getTransaction().begin();
+        Query query = entityManager.createNativeQuery("update student set last_name = '" + lastName + "' where id = " + id);
+        query.executeUpdate();
+        entityManager.getTransaction().commit();
+        return findById(id);
+    }
     public void delete(Student student) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
@@ -59,6 +74,27 @@ public class RepositoryStudent {
         entityTransaction.commit();
     }
 
+    public void deleteStudent(Long id) {
+        entityManager.getTransaction().begin();
+        Query query = entityManager.createNativeQuery("delete from student where id = " + id);
+        query.executeUpdate();
+        entityManager.getTransaction().commit();
+    }
+
+    public List<Student> filterByFirstName(String keywork) {
+        Query query = entityManager.createQuery("select st from Student st where st.firstName like '" + keywork + "%'");
+        return query.getResultList();
+    }
+
+    public Long count() {
+        Query query = entityManager.createQuery("select count(st) from Student st");
+        return (Long) query.getSingleResult();
+    }
+
+    public List<Student> findSortingByFirstName() {
+        Query query = entityManager.createQuery("select s from Student s order by s.firstName desc ");
+        return query.getResultList();
+    }
 
     public void close() {
         entityManager.close();
