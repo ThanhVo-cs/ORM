@@ -1,7 +1,8 @@
-package orm.jpa;
+package orm.jpa.repository;
 
 import orm.jpa.model.School;
 import orm.jpa.model.Student;
+import orm.jpa.model.Tutor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -97,13 +98,13 @@ public class RepositoryStudent {
         return query.getResultList();
     }
 
-    public Student addSchool(Long id, School school) {
+    public Tutor addTutors(Long id, Tutor tutor) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         Student student = findById(id);
-        student.setSchool(school);
+        student.setTutor(tutor);
         entityTransaction.commit();
-        return student;
+        return tutor;
     }
     public void close() {
         entityManager.close();

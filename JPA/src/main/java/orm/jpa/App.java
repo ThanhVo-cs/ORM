@@ -3,16 +3,18 @@ package orm.jpa;
 
 import orm.jpa.model.School;
 import orm.jpa.model.Student;
+import orm.jpa.model.Tutor;
+import orm.jpa.repository.ReposirotySchool;
+import orm.jpa.repository.RepositoryStudent;
+import orm.jpa.repository.RepositoryTutor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class App {
     public static void main(String[] args) {
         RepositoryStudent repo = new RepositoryStudent();
         ReposirotySchool repoSchool = new ReposirotySchool();
+        RepositoryTutor repoTutor = new RepositoryTutor();
         Student student = new Student();
         student.setFirstName("Duong Huynh");
         student.setLastName("Thi");
@@ -21,14 +23,23 @@ public class App {
         System.out.println("Add Student");
         System.out.println(student.toString());
 
-        //add School
-        School school = new School("IUH", "HCM");
+        //add Tutor
+        Tutor tutor = new Tutor("first_name1", "last_name1");
+        repoTutor.add(tutor);
+        student.setTutor(tutor);
+
+        repo.addTutors(student.getId(), tutor);
+        System.out.println("Tutor" + tutor.toString());
+
+        // add School
+        School school = new School("School_1", "City_1");
         repoSchool.add(school);
-        student.setSchool(school);
 
-        repo.addSchool(student.getId(), school);
-        System.out.println("School" + school.toString());
+        repoSchool.addStudent(school.getId(), student);
 
+        school = repoSchool.find(school.getId());
+
+        repoSchool.removeStudent(school.getId(), student);
 
         student = repo.findById(student.getId());
         System.out.println("Student Info: " + student.toString());

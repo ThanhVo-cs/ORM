@@ -4,6 +4,7 @@
 
         <class>orm.jpa.model.Student</class>
         <class>orm.jpa.model.School</class>
+        <class>orm.jpa.model.Tutor</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>

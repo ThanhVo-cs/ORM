@@ -3,10 +3,8 @@ package orm.jpa.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "student")
-@NamedQuery(name = "find student by id", query = "Select s from Student s where s.id = :id")
-public class Student {
-
+@Table(name = "tutor")
+public class Tutor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,15 +15,8 @@ public class Student {
     @Column(name = "last_name", nullable = false, length = 200)
     private String lastName;
 
-    @OneToOne
-    private Tutor tutor;
-
-    public Student() {
-    }
-
-    public Student(Long id, String fistName, String lastName) {
-        this.id = id;
-        this.firstName = fistName;
+    public Tutor(String firstName, String lastName) {
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 
@@ -53,21 +44,12 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public Tutor getTutor() {
-        return tutor;
-    }
-
-    public void setTutor(Tutor tutor) {
-        this.tutor = tutor;
-    }
-
     @Override
     public String toString() {
-        return "Student{" +
+        return "Tutor{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", tutor=" + tutor +
                 '}';
     }
 }
