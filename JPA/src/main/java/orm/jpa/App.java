@@ -3,9 +3,11 @@ package orm.jpa;
 
 import orm.jpa.model.School;
 import orm.jpa.model.Student;
+import orm.jpa.model.Teacher;
 import orm.jpa.model.Tutor;
 import orm.jpa.repository.ReposirotySchool;
 import orm.jpa.repository.RepositoryStudent;
+import orm.jpa.repository.RepositoryTeacher;
 import orm.jpa.repository.RepositoryTutor;
 
 import java.util.List;
@@ -15,6 +17,7 @@ public class App {
         RepositoryStudent repo = new RepositoryStudent();
         ReposirotySchool repoSchool = new ReposirotySchool();
         RepositoryTutor repoTutor = new RepositoryTutor();
+        RepositoryTeacher repoTeacher = new RepositoryTeacher();
         Student student = new Student();
         student.setFirstName("Duong Huynh");
         student.setLastName("Thi");
@@ -34,6 +37,19 @@ public class App {
         // add School
         School school = new School("School_1", "City_1");
         repoSchool.add(school);
+
+        // add Teacher
+
+        Teacher teacher1 = new Teacher("Mary", "Bos");
+        teacher1.setSchool(school);
+        repoTeacher.add(teacher1);
+
+        Teacher teacher2 = new Teacher("Tom", "Hamilton");
+        teacher2.setSchool(school);
+        repoTeacher.add(teacher2);
+
+        System.out.println("Teacher Info" + teacher1.toString());
+        System.out.println("Teacher Info" + teacher2.toString());
 
         repoSchool.addStudent(school.getId(), student);
 
