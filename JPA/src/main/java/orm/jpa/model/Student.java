@@ -1,6 +1,8 @@
 package orm.jpa.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "student")
@@ -20,13 +22,23 @@ public class Student {
     @OneToOne
     private Tutor tutor;
 
+    @ManyToMany(mappedBy = "students")
+    private Set<Teacher> teachers = new HashSet<>();
+
     public Student() {
     }
 
-    public Student(Long id, String fistName, String lastName) {
-        this.id = id;
+    public Student(String fistName, String lastName) {
         this.firstName = fistName;
         this.lastName = lastName;
+    }
+
+    public Set<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(Set<Teacher> teachers) {
+        this.teachers = teachers;
     }
 
     public Long getId() {
@@ -59,6 +71,20 @@ public class Student {
 
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
+    }
+
+    public void addTeacher(Teacher teacher) {
+        boolean added = teachers.add(teacher);
+        if (added) {
+            teacher.getStudents().add(this);
+        }
+    }
+
+    public void removeTeacher(Teacher teacher) {
+        boolean remove = teachers.remove(teacher);
+        if (remove) {
+            teacher.getStudents().remove(this);
+        }
     }
 
     @Override

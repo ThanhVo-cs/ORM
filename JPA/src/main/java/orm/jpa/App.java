@@ -40,16 +40,21 @@ public class App {
 
         // add Teacher
 
-        Teacher teacher1 = new Teacher("Mary", "Bos");
-        teacher1.setSchool(school);
-        repoTeacher.add(teacher1);
+//        Teacher teacher1 = new Teacher("Mary", "Bos");
+//        teacher1.setSchool(school);
+//        repoTeacher.add(teacher1);
+//
+//        Teacher teacher2 = new Teacher("Tom", "Hamilton");
+//        teacher2.setSchool(school);
+//        repoTeacher.add(teacher2);
+//
+//        System.out.println("Teacher Info" + teacher1.toString());
+//        System.out.println("Teacher Info" + teacher2.toString());
 
-        Teacher teacher2 = new Teacher("Tom", "Hamilton");
-        teacher2.setSchool(school);
-        repoTeacher.add(teacher2);
-
-        System.out.println("Teacher Info" + teacher1.toString());
-        System.out.println("Teacher Info" + teacher2.toString());
+        Teacher teacher = new Teacher("firstname_1", "lastname_1");
+        teacher.addStudent(new Student("SFirstName_1", "SLastName_1"));
+        teacher.addStudent(new Student("SFirstName_2", "SLastName_2"));
+        repoTeacher.add(teacher);
 
         repoSchool.addStudent(school.getId(), student);
 
